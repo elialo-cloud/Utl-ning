@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <title>Boden — Lånesystem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">B</div>
+      <div>
+        <strong>BODEN</strong>
+        <span>Lånesystem</span>
+      </div>
+    </div>
+    <button class="top-action" id="loansBtn">📋 Aktiva lån <b id="loanCount">0</b></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">ENKELT FÖR LÄRARE</p>
+        <h1>Vem lånar<br><span>vad?</span></h1>
+        <p class="hero-copy">Välj klass och elev. Sedan är lånet registrerat.</p>
+      </div>
+      <div class="hero-badge">DEMO</div>
+    </section>
+
+    <section id="classesView" class="view">
+      <div class="section-head">
+        <div><p class="eyebrow">STEG 1</p><h2>Välj klass</h2></div>
+        <span class="step-pill">1 / 3</span>
+      </div>
+      <div id="classGrid" class="class-grid"></div>
+    </section>
+
+    <section id="studentsView" class="view hidden">
+      <button class="back-btn" data-back="classes">← Till klasser</button>
+      <div class="section-head">
+        <div><p class="eyebrow">STEG 2</p><h2 id="classTitle">Välj elev</h2></div>
+        <span class="step-pill">2 / 3</span>
+      </div>
+      <div class="search-wrap">
+        <span>⌕</span><input id="studentSearch" placeholder="Sök elev..." autocomplete="off">
+      </div>
+      <div id="studentGrid" class="student-grid"></div>
+    </section>
+
+    <section id="itemsView" class="view hidden">
+      <button class="back-btn" data-back="students">← Till elever</button>
+      <div class="section-head">
+        <div><p class="eyebrow">STEG 3</p><h2 id="studentTitle">Välj sak</h2><p id="studentSubtitle"></p></div>
+        <span class="step-pill">3 / 3</span>
+      </div>
+      <div id="itemGrid" class="item-grid"></div>
+    </section>
+
+    <section id="loansView" class="view hidden">
+      <div class="section-head">
+        <div><p class="eyebrow">ÖVERSIKT</p><h2>Aktiva lån</h2><p>Här ser du vad som är utlånat just nu.</p></div>
+        <button class="ghost-btn" id="resetBtn">Återställ demo</button>
+      </div>
+      <div id="loanList" class="loan-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="confirmModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-icon">✓</div>
+      <p class="eyebrow">REGISTRERA LÅN</p>
+      <h3 id="modalTitle">Låna</h3>
+      <p id="modalText"></p>
+      <div class="modal-actions">
+        <button class="ghost-btn" id="cancelModal">Avbryt</button>
+        <button class="primary-btn" id="confirmLoan">Låna ut</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
