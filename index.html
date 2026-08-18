@@ -12,22 +12,22 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark">B</div>
-      <div>
-        <strong>BODEN</strong>
-        <span>Lånesystem</span>
-      </div>
+      <div><strong>BODEN</strong><span>Lånesystem</span></div>
     </div>
-    <button class="top-action" id="loansBtn">📋 Aktiva lån <b id="loanCount">0</b></button>
+    <div class="top-actions">
+      <button class="top-action" id="loansBtn">📋 Aktiva lån <b id="loanCount">0</b></button>
+      <button class="top-action teacher-action" id="teacherBtn">⚙️ Lärarläge</button>
+    </div>
   </header>
 
   <main>
     <section class="hero">
       <div>
-        <p class="eyebrow">ENKELT FÖR LÄRARE</p>
+        <p class="eyebrow">LÅNESYSTEM FÖR SKOLAN</p>
         <h1>Vem lånar<br><span>vad?</span></h1>
         <p class="hero-copy">Välj klass och elev. Sedan är lånet registrerat.</p>
       </div>
-      <div class="hero-badge">DEMO</div>
+      <div class="hero-badge">V2</div>
     </section>
 
     <section id="classesView" class="view">
@@ -44,9 +44,7 @@
         <div><p class="eyebrow">STEG 2</p><h2 id="classTitle">Välj elev</h2></div>
         <span class="step-pill">2 / 3</span>
       </div>
-      <div class="search-wrap">
-        <span>⌕</span><input id="studentSearch" placeholder="Sök elev..." autocomplete="off">
-      </div>
+      <div class="search-wrap"><span>⌕</span><input id="studentSearch" placeholder="Sök elev..." autocomplete="off"></div>
       <div id="studentGrid" class="student-grid"></div>
     </section>
 
@@ -62,9 +60,29 @@
     <section id="loansView" class="view hidden">
       <div class="section-head">
         <div><p class="eyebrow">ÖVERSIKT</p><h2>Aktiva lån</h2><p>Här ser du vad som är utlånat just nu.</p></div>
-        <button class="ghost-btn" id="resetBtn">Återställ demo</button>
       </div>
       <div id="loanList" class="loan-list"></div>
+    </section>
+
+    <section id="teacherView" class="view hidden">
+      <div class="section-head">
+        <div><p class="eyebrow">ADMINISTRATION</p><h2>Lärarläge</h2><p>Hantera boden, elever och utlån.</p></div>
+        <button class="ghost-btn" id="teacherLogout">Logga ut</button>
+      </div>
+
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="dashboard">Översikt</button>
+        <button class="admin-tab" data-tab="items">Saker</button>
+        <button class="admin-tab" data-tab="classes">Klasser</button>
+        <button class="admin-tab" data-tab="history">Historik</button>
+      </div>
+
+      <div id="adminDashboard" class="admin-panel"></div>
+      <div id="adminItems" class="admin-panel hidden"></div>
+      <div id="adminClasses" class="admin-panel hidden"></div>
+      <div id="adminHistory" class="admin-panel hidden"></div>
     </section>
   </main>
 
@@ -79,6 +97,33 @@
       <div class="modal-actions">
         <button class="ghost-btn" id="cancelModal">Avbryt</button>
         <button class="primary-btn" id="confirmLoan">Låna ut</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pinModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-icon">🔐</div>
+      <p class="eyebrow">LÄRARLÄGE</p>
+      <h3>Logga in</h3>
+      <p>Ange lärarens PIN-kod för att öppna administrationen.</p>
+      <input id="pinInput" class="admin-input pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="PIN-kod">
+      <p id="pinError" class="form-error"></p>
+      <div class="modal-actions">
+        <button class="ghost-btn" id="cancelPin">Avbryt</button>
+        <button class="primary-btn" id="confirmPin">Öppna</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminModal" class="modal hidden">
+    <div class="modal-card admin-modal-card">
+      <p class="eyebrow" id="adminModalEyebrow">ADMIN</p>
+      <h3 id="adminModalTitle"></h3>
+      <div id="adminModalBody"></div>
+      <div class="modal-actions">
+        <button class="ghost-btn" id="cancelAdminModal">Avbryt</button>
+        <button class="primary-btn" id="saveAdminModal">Spara</button>
       </div>
     </div>
   </div>
