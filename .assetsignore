@@ -1,0 +1,7 @@
+worker.js
+wrangler.jsonc
+schema.sql
+.assetsignore
+README.md
+.gitignore
+.github/
