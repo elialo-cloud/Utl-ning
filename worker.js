@@ -61,6 +61,20 @@ async function replaceState(db, data) {
   await db.batch(statements);
 }
 
+async function serveAsset(request, env) {
+  const response = await env.ASSETS.fetch(request);
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  return new HTMLRewriter()
+    .on("head", {
+      element(element) {
+        element.append('<script src="/cloudflare-sync.js?v=1"></script>', { html: true });
+      }
+    })
+    .transform(response);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -90,6 +104,6 @@ export default {
       }
     }
 
-    return env.ASSETS.fetch(request);
+    return serveAsset(request, env);
   }
 };
