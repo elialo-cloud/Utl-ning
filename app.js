@@ -63,7 +63,10 @@ function activeLoans() {
 }
 
 function available(item) {
-  return Math.max(0, Number(item.total || 0) - activeLoans().filter(loan => loan.itemId === item.id).length);
+  // Lagerstatus räknas från totalantal minus alla aktiva lån, inte från en separat lagersiffra.
+  const total = Math.max(0, Math.floor(Number(item.total) || 0));
+  const checkedOut = activeLoans().filter(loan => loan.itemId === item.id).length;
+  return Math.max(0, total - checkedOut);
 }
 
 function date(value) {
@@ -239,7 +242,18 @@ function returnLoan(id) {
 
 function renderLoans() {
   const query = $("loanSearch").value.toLowerCase().trim();
-  const loans = activeLoans().filter(loan => `${loan.student} ${loan.className} ${loan.itemName}`.toLowerCase().includes(query)).sort((a, b) => new Date(b.borrowedAt) - new Date(a.borrowedAt));
+  const classSelect = $("loanClassFilter");
+  const previousClass = classSelect?.value || "";
+  if (classSelect) {
+    const options = `<option value="">Alla klasser</option>${data.classes.map(cls => `<option value="${attr(cls.id)}">${escapeHtml(cls.name)}</option>`).join("")}`;
+    if (classSelect.dataset.options !== options) {
+      classSelect.innerHTML = options;
+      classSelect.dataset.options = options;
+      classSelect.value = previousClass;
+    }
+  }
+  const classFilter = classSelect?.value || "";
+  const loans = activeLoans().filter(loan => (!classFilter || loan.classId === classFilter) && `${loan.student} ${loan.className} ${loan.itemName}`.toLowerCase().includes(query)).sort((a, b) => new Date(b.borrowedAt) - new Date(a.borrowedAt));
   $("activeTotal").textContent = activeLoans().length;
   $("loanList").innerHTML = loans.length
     ? loans.map(loan => `<article class="loan-card"><span class="loan-item-icon">${loan.icon}</span><span class="loan-info"><strong>${escapeHtml(loan.itemName)}</strong><small>${escapeHtml(loan.student)} · ${escapeHtml(loan.className)}</small><em>${date(loan.borrowedAt)}</em></span><button class="return-btn" data-return="${attr(loan.id)}">Lämna tillbaka</button></article>`).join("")
@@ -266,7 +280,9 @@ function renderAdmin() {
   const active = activeLoans();
 
   if (adminTab === "dashboard") {
-    panel.innerHTML = `<div class="admin-card"><div class="admin-head"><div><h3>Aktiva lån</h3><p>Snabb återlämning.</p></div></div>${active.length ? active.map(adminRow).join("") : empty("✅", "Allt är inne", "Inga aktiva lån just nu.")}</div>`;
+    const lowStock = data.items.filter(item => available(item) <= Math.min(2, Number(item.total || 0)) && Number(item.total || 0) > 0);
+    const popular = [...data.items].map(item => ({ ...item, borrowedCount: data.loans.filter(loan => loan.itemId === item.id).length })).filter(item => item.borrowedCount > 0).sort((a, b) => b.borrowedCount - a.borrowedCount).slice(0, 5);
+    panel.innerHTML = `<div class="admin-card"><div class="admin-head"><div><h3>Aktiva lån</h3><p>Senaste lånen först · lämna tillbaka direkt här.</p></div></div>${active.length ? active.slice().sort((a,b) => new Date(b.borrowedAt)-new Date(a.borrowedAt)).map(adminRow).join("") : empty("✅", "Allt är inne", "Inga aktiva lån just nu.")}</div><div class="admin-insights"><div class="admin-card"><div class="admin-head"><div><h3>Behöver fyllas på</h3><p>Saker med högst två lediga exemplar.</p></div></div>${lowStock.length ? lowStock.map(item => `<div class="admin-row"><span>${item.icon}<strong>${escapeHtml(item.name)}</strong><small>${available(item)} lediga av ${item.total}</small></span><span class="status ${available(item) === 0 ? "active" : "returned"}">${available(item) === 0 ? "Slut" : "Lågt lager"}</span></div>`).join("") : `<p class="admin-note">Alla saker har bra lagersaldo.</p>`}</div><div class="admin-card"><div class="admin-head"><div><h3>Mest utlånat</h3><p>Räknat från sparad historik.</p></div></div>${popular.length ? popular.map(item => `<div class="admin-row"><span>${item.icon}<strong>${escapeHtml(item.name)}</strong><small>${item.borrowedCount} utlåningar totalt</small></span><span class="status returned">${available(item)} lediga</span></div>`).join("") : `<p class="admin-note">Här visas statistik när saker har lånats ut.</p>`}</div></div>`;
   } else if (adminTab === "items") {
     renderAdminItems(panel);
   } else if (adminTab === "classes") {
@@ -483,6 +499,7 @@ function init() {
 
   $("studentSearch").addEventListener("input", renderStudents);
   $("loanSearch").addEventListener("input", renderLoans);
+  $("loanClassFilter").addEventListener("change", renderLoans);
   $("globalSearch").addEventListener("input", globalSearch);
   $("globalSearch").addEventListener("keydown", event => { if (event.key === "Escape") { $("globalSearch").value = ""; globalSearch(); } });
   $("pinInput").addEventListener("keydown", event => { if (event.key === "Enter") confirmPin(); });
