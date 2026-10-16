@@ -327,19 +327,28 @@ function renderAdminItems(panel) {
 }
 
 function renderAdminClasses(panel) {
-  panel.innerHTML = `<div class="admin-card"><div class="admin-head"><div><h3>Klasser & elever</h3><p>Ändra listan som används vid utlåning.</p></div><button class="primary-btn" id="addClass">+ Klass</button></div>${data.classes.map(cls => `<div class="class-admin"><div class="admin-head"><strong>Klass ${escapeHtml(cls.name)}</strong><button class="ghost-btn" data-add="${attr(cls.id)}">+ Elev</button></div><div class="chips">${cls.students.map((student, index) => `<span>${escapeHtml(student)} <button data-remove="${attr(cls.id)}|${index}">×</button></span>`).join("")}</div></div>`).join("")}</div>`;
+  panel.innerHTML = `<div class="admin-card"><div class="admin-head"><div><h3>Klasser & elever</h3><p>Klistra in eller skriv en elev per rad. Du kan lägga till en hel klasslista på en gång.</p></div><button class="primary-btn" id="addClass">+ Klass</button></div>${data.classes.map(cls => `<div class="class-admin"><div class="admin-head"><strong>Klass ${escapeHtml(cls.name)} <span class="student-count">(${cls.students.length} elever)</span></strong></div><label class="student-list-label" for="students-${attr(cls.id)}">Elevlista</label><textarea class="admin-input student-list-editor" id="students-${attr(cls.id)}" rows="7" spellcheck="false" placeholder="En elev per rad">${escapeHtml(cls.students.join("\n"))}</textarea><div class="student-list-help">En elev per rad. Dubbletter tas bort automatiskt.</div><div class="student-list-actions"><button class="primary-btn" data-save-students="${attr(cls.id)}">Spara elevlista</button></div></div>`).join("")}</div>`;
   $("addClass").onclick = () => adminModal("Ny klass", "class");
-  panel.querySelectorAll("[data-add]").forEach(button => button.onclick = () => adminModal("Ny elev", "student", button.dataset.add));
-  panel.querySelectorAll("[data-remove]").forEach(button => button.onclick = () => {
-    const [classId, index] = button.dataset.remove.split("|");
-    const cls = data.classes.find(c => c.id === classId);
-    if (cls) cls.students.splice(Number(index), 1);
+  panel.querySelectorAll("[data-save-students]").forEach(button => button.onclick = () => {
+    const cls = data.classes.find(c => c.id === button.dataset.saveStudents);
+    const editor = panel.querySelector(`#students-${CSS.escape(button.dataset.saveStudents)}`);
+    if (!cls || !editor) return;
+    const names = editor.value.split(/[\n,;]+/).map(name => name.trim()).filter(Boolean);
+    const unique = [];
+    const seen = new Set();
+    for (const name of names) {
+      const key = name.toLocaleLowerCase("sv-SE");
+      if (!seen.has(key)) { seen.add(key); unique.push(name); }
+    }
+    const removedWithLoans = cls.students.filter(name => !unique.some(next => next.toLocaleLowerCase("sv-SE") === name.toLocaleLowerCase("sv-SE")) && activeLoans().some(loan => loan.classId === cls.id && loan.student === name));
+    if (removedWithLoans.length) return toast("Kan inte ta bort " + removedWithLoans.join(", ") + " – eleven har aktiva lån.");
+    cls.students = unique;
     save();
     renderClasses();
     renderAdmin();
+    toast(`Elevlista sparad: ${unique.length} elever i ${cls.name}`);
   });
 }
-
 function renderHistory(panel) {
   const history = [...data.loans].sort((a, b) => new Date(b.borrowedAt) - new Date(a.borrowedAt));
   panel.innerHTML = `<div class="admin-card"><div class="admin-head"><div><h3>Historik</h3><p>Alla utlåningar på denna enhet.</p></div><button class="ghost-btn" id="clearHistory">Rensa historik</button></div>${history.length ? history.map(loan => `<div class="admin-row"><span>${loan.icon}<strong>${escapeHtml(loan.itemName)}</strong><small>${escapeHtml(loan.student)} · ${escapeHtml(loan.className)} · ${date(loan.borrowedAt)}</small></span><span class="status ${loan.returned ? "returned" : "active"}">${loan.returned ? "Återlämnad" : "Ute"}</span></div>`).join("") : empty("📜", "Ingen historik", "")}</div>`;
