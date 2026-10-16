@@ -85,6 +85,28 @@ function toast(message) {
   toast.timer = setTimeout(() => el.classList.remove("show"), 2200);
 }
 
+function toastUndo(message, loanId) {
+  const el = $("toast");
+  el.innerHTML = `<span>${escapeHtml(message)}</span> <button type="button" class="toast-undo">Ångra</button>`;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 6000);
+  el.querySelector(".toast-undo").onclick = () => {
+    const loan = data.loans.find(item => item.id === loanId && !item.returned);
+    if (!loan) return;
+    loan.returned = true;
+    loan.returnedAt = new Date().toISOString();
+    save();
+    renderItems();
+    renderStudentLoans();
+    renderStudents();
+    renderLoans();
+    renderAdmin();
+    updateCount();
+    toast("Utlåningen ångrades");
+  };
+}
+
 function show(id) {
   document.querySelectorAll(".view").forEach(view => view.classList.add("hidden"));
   const target = $(id);
@@ -188,9 +210,9 @@ function renderItems() {
 
 function openLoan(item) {
   if (!item || !selectedStudent || !selectedClass || available(item) <= 0) return;
+  // Ett tryck lånar ut direkt; toasten erbjuder en kort ångra-funktion.
   selectedItem = item;
-  $("modalText").innerHTML = `<strong>${escapeHtml(selectedStudent)}</strong> · ${escapeHtml(selectedClass.name)}<br><br><span class="confirm-item">${item.icon} ${escapeHtml(item.name)}</span><br><small>${available(item) - 1} kvar efter detta lån.</small>`;
-  $("confirmModal").classList.remove("hidden");
+  confirmLoan();
 }
 
 function closeModal() {
@@ -203,7 +225,7 @@ function confirmLoan() {
   const item = data.items.find(x => x.id === selectedItem.id);
   if (!item || available(item) <= 0) return closeModal();
 
-  data.loans.push({
+  const newLoan = {
     id: globalThis.crypto?.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
     classId: selectedClass.id,
     className: selectedClass.name,
@@ -214,11 +236,12 @@ function confirmLoan() {
     borrowedAt: new Date().toISOString(),
     returned: false,
     returnedAt: null
-  });
+  };
+  data.loans.push(newLoan);
 
   save();
   closeModal();
-  toast(`${item.icon} ${item.name} utlånad till ${selectedStudent}`);
+  toastUndo(`${item.icon} ${item.name} utlånad till ${selectedStudent}`, newLoan.id);
   renderItems();
   renderStudentLoans();
   renderStudents();
