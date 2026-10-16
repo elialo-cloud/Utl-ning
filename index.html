@@ -24,15 +24,58 @@ body{font-size:18px;background:linear-gradient(180deg,#f7f8fc 0%,#f1f4f9 100%)}
 .modal-card{border-radius:28px;padding:34px}.modal-card h3{font-size:30px}
 @media(max-width:900px){.view{padding:36px 24px 64px}.hero{padding:40px;min-height:280px}.hero h1{font-size:56px}.class-grid{grid-template-columns:1fr 1fr}.student-grid,.item-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){body{font-size:16px}.topbar{height:74px;padding:0 14px}.brand-mark{width:42px;height:42px;font-size:20px}.brand strong{font-size:15px}.brand small{font-size:10px}.nav-btn{min-height:44px;padding:9px 11px;font-size:13px}.view{padding:27px 14px 55px}.hero{min-height:225px;padding:28px 23px;border-radius:24px}.hero h1{font-size:43px}.hero p:not(.eyebrow){font-size:16px}.quick-search{height:62px;margin:18px 0 34px}.quick-search input{font-size:17px}.section-head h2{font-size:29px}.class-grid,.student-grid,.item-grid{gap:11px}.class-card{min-height:125px;padding:16px;border-radius:18px}.class-card strong{font-size:20px}.class-icon{width:46px;height:46px;font-size:22px}.student-card{padding:15px;border-radius:18px}.student-info strong{font-size:17px}.avatar{width:44px;height:44px}.item-card{padding:16px;border-radius:18px}.item-info strong{font-size:17px}.item-icon,.loan-item-icon{width:50px;height:50px;font-size:25px}.stock{font-size:12px}.stats-grid{gap:10px}.stat-card{padding:16px}.stat-card strong{font-size:30px}.admin-card{padding:17px}}
-.loan-filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,1fr);gap:12px}.admin-insights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.admin-note{color:#7b8495;font-size:14px;padding:4px 0}.toast-undo{margin-left:10px;border:1px solid rgba(255,255,255,.45);background:#fff;color:#172033;border-radius:8px;padding:6px 10px;font-weight:900}.toast{display:flex;align-items:center;justify-content:center;gap:4px}.toast span{display:inline-block}@media(max-width:600px){.loan-filters{grid-template-columns:1fr;gap:8px}.admin-insights{grid-template-columns:1fr}}\n.class-admin{margin-top:18px;padding-top:18px;border-top:1px solid #e7eaf1}.student-count{font-size:14px;color:#7b8495;font-weight:500}.student-list-label{display:block;margin:12px 0 7px;font-size:14px;font-weight:800;color:#344054}.student-list-editor{display:block;width:100%;min-height:150px;resize:vertical;font:inherit;font-size:15px;line-height:1.65;white-space:pre;box-sizing:border-box;padding:14px;border:1px solid #d6dce8;border-radius:12px;background:#fbfcff;color:#172033}.student-list-help{font-size:13px;color:#7b8495;margin-top:7px}.student-list-actions{display:flex;justify-content:flex-end;margin-top:12px}.class-admin .admin-head{margin-bottom:6px}@media(max-width:600px){.student-list-editor{font-size:16px;min-height:180px}.student-list-actions .primary-btn{width:100%}}\n</style><style>.teacher-action{display:inline-flex!important}</style></head>
+.loan-filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,1fr);gap:12px}.admin-insights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.admin-note{color:#7b8495;font-size:14px;padding:4px 0}.toast-undo{margin-left:10px;border:1px solid rgba(255,255,255,.45);background:#fff;color:#172033;border-radius:8px;padding:6px 10px;font-weight:900}.toast{display:flex;align-items:center;justify-content:center;gap:4px}.toast span{display:inline-block}@media(max-width:600px){.loan-filters{grid-template-columns:1fr;gap:8px}.admin-insights{grid-template-columns:1fr}}\n.class-admin{margin-top:18px;padding-top:18px;border-top:1px solid #e7eaf1}.student-count{font-size:14px;color:#7b8495;font-weight:500}.student-list-label{display:block;margin:12px 0 7px;font-size:14px;font-weight:800;color:#344054}.student-list-editor{display:block;width:100%;min-height:150px;resize:vertical;font:inherit;font-size:15px;line-height:1.65;white-space:pre;box-sizing:border-box;padding:14px;border:1px solid #d6dce8;border-radius:12px;background:#fbfcff;color:#172033}.student-list-help{font-size:13px;color:#7b8495;margin-top:7px}.student-list-actions{display:flex;justify-content:flex-end;margin-top:12px}.class-admin .admin-head{margin-bottom:6px}@media(max-width:600px){.student-list-editor{font-size:16px;min-height:180px}.student-list-actions .primary-btn{width:100%}}\n</style><style>
+/* Barnvänlig startsida: tydliga val, glada färger och stora tryckytor */
+:root{--accent:#087f8c;--accent2:#066a75;--blue:#e2f7f7;--ink:#183044;--bg:#fffaf0}
+body{font-family:"Trebuchet MS",Inter,ui-sans-serif,sans-serif;background:#fffaf0;color:#183044}
+.topbar{background:#fff;border-bottom:3px solid #e8f5f5;box-shadow:none}
+.brand-mark{background:#ffbd3f;color:#183044;border-radius:17px;transform:rotate(-4deg)}
+.brand strong{letter-spacing:.03em}.brand small{color:#527080}
+.nav-btn{border:2px solid #dcebec;border-radius:15px;color:#183044;box-shadow:0 2px 0 #dcebec}
+.nav-btn:first-child{background:#e7f8f3}.nav-btn b{background:#ffdf86;color:#183044}
+.view{padding-top:30px}
+.hero{min-height:0;padding:26px 30px;border:0;border-radius:26px;background:linear-gradient(115deg,#087f8c,#25b6a7);box-shadow:0 7px 0 #066a75}
+.hero:after{width:220px;height:220px;right:-75px;top:-115px;background:rgba(255,255,255,.12)}
+.hero .eyebrow{font-size:13px;letter-spacing:.06em;color:#e3ffff!important}
+.hero h1{font-size:clamp(34px,4vw,48px)!important;line-height:1.05;letter-spacing:-.03em;color:white!important}
+.hero h1 span{color:#ffdf86!important}
+.hero p:not(.eyebrow){font-size:18px!important;color:white!important;line-height:1.45;margin-top:12px}
+.quick-search{margin:22px 0 30px;border:2px solid #dcebec;border-radius:17px;box-shadow:0 3px 0 #e5eeee}
+.quick-search input{font-size:18px}
+.section-head{margin-bottom:15px}.section-head h2{font-size:clamp(26px,3vw,34px);letter-spacing:-.02em;color:#183044}
+.section-head .eyebrow{color:#087f8c;font-size:12px;letter-spacing:.06em}
+.step-pill{background:#ffdf86;border:0;color:#183044;font-size:14px;padding:9px 13px}
+.class-grid{gap:16px}
+.class-card{min-height:135px;padding:20px;border:2px solid transparent;border-radius:22px;box-shadow:0 4px 0 #e1e7e8;transition:transform .12s,box-shadow .12s}
+.class-card:nth-child(4n+1){background:#e4f8f1;border-color:#bcebdc}
+.class-card:nth-child(4n+2){background:#e7f1ff;border-color:#c8ddff}
+.class-card:nth-child(4n+3){background:#fff0d5;border-color:#ffe0a0}
+.class-card:nth-child(4n){background:#f4eaff;border-color:#e2ceff}
+.class-card:hover{transform:translateY(-2px);box-shadow:0 6px 0 #d6e0e2}
+.class-icon{background:#fff;color:#183044;border-radius:17px;width:58px;height:58px;font-size:28px}
+.class-card strong{font-size:26px;color:#183044}.class-card small{font-size:15px;color:#456174}
+.class-card>b{font-size:28px;color:#087f8c}
+.student-card,.item-card{border:2px solid #e0ebed;border-radius:19px;box-shadow:0 3px 0 #e7eeee}
+.student-card{min-height:88px}.student-card:hover,.item-card:hover:not(:disabled){border-color:#77d4c8;box-shadow:0 5px 0 #d3e9e7}
+.avatar{background:#ffdf86;color:#183044;border-radius:17px;width:54px;height:54px;font-size:18px}
+.student-info strong,.item-info strong{font-size:19px;color:#183044}
+.student-info small,.item-info small{font-size:14px;color:#527080}
+.item-icon{background:#e4f8f1;border-radius:17px}
+.category{border:2px solid #dcebec;border-radius:15px;padding:11px 16px}
+.category.active{background:#087f8c;border-color:#087f8c}
+.back-btn{border:2px solid #dcebec;border-radius:14px;background:#fff}
+.primary-btn{background:#087f8c;border-radius:14px;box-shadow:0 3px 0 #066a75}
+@media(max-width:600px){.view{padding-top:22px}.hero{min-height:0;padding:23px 20px;border-radius:22px}.hero h1{font-size:36px!important}.hero p:not(.eyebrow){font-size:16px!important}.class-card{min-height:112px;padding:12px;border-radius:18px;gap:10px}.class-icon{width:43px;height:43px;font-size:22px}.class-card strong{font-size:21px}.class-card small{font-size:12px}.student-card{min-height:82px}.student-info strong,.item-info strong{font-size:16px}}
+.teacher-action{display:inline-flex!important}
+</style></head>
 <body><div class="app-shell">
 <header class="topbar"><button class="brand" id="homeBtn"><span class="brand-mark">B</span><span><strong>BODEN</strong><small>Lånesystem</small></span></button><nav><button class="nav-btn" id="activeBtn">📋 Aktiva <b id="loanCount">0</b></button><button class="nav-btn teacher-action" id="teacherBtn">⚙️ Lärare</button></nav></header>
 <main>
-<section id="homeView" class="view"><div class="hero"><div><p class="eyebrow">BODEN · V6</p><h1>Vad ska<br><span>lånas?</span></h1><p>Välj klass och elev. Sedan är det bara att trycka på saken.</p></div><div class="hero-mark">B</div></div>
+<section id="homeView" class="view"><div class="hero"><div><p class="eyebrow">HEJ! 👋 DAGS ATT LÅNA</p><h1>Vad vill du<br><span>låna idag?</span></h1><p>Välj din klass och ditt namn. Tryck sedan på saken du vill låna!</p></div><div class="hero-mark">B</div></div>
 <div class="quick-search"><span>⌕</span><input id="globalSearch" placeholder="Sök elev eller sak..." autocomplete="off"></div><div id="searchResults" class="search-results hidden"></div>
-<div class="section-head"><div><p class="eyebrow">STEG 1</p><h2>Välj klass</h2></div><span class="step-pill">1 / 3</span></div><div id="classGrid" class="class-grid"></div></section>
-<section id="studentsView" class="view hidden"><button class="back-btn" data-back="home">← Till klasser</button><div class="section-head"><div><p class="eyebrow">STEG 2</p><h2 id="classTitle">Välj elev</h2></div><span class="step-pill">2 / 3</span></div><div class="search-wrap"><span>⌕</span><input id="studentSearch" placeholder="Sök elev..." autocomplete="off"></div><div id="studentGrid" class="student-grid"></div></section>
-<section id="itemsView" class="view hidden"><button class="back-btn" data-back="students">← Till elever</button><div class="section-head"><div><p class="eyebrow">STEG 3</p><h2 id="studentTitle">Välj sak</h2><p id="studentSubtitle"></p></div><span class="step-pill">3 / 3</span></div><div id="studentLoans" class="mini-loans"></div><div class="category-row" id="categoryRow"></div><div id="itemGrid" class="item-grid"></div></section>
+<div class="section-head"><div><p class="eyebrow">👣 STEG 1 AV 3</p><h2>Vilken klass går du i?</h2></div><span class="step-pill">1 av 3</span></div><div id="classGrid" class="class-grid"></div></section>
+<section id="studentsView" class="view hidden"><button class="back-btn" data-back="home">← Till klasser</button><div class="section-head"><div><p class="eyebrow">STEG 2</p><h2 id="classTitle">Välj elev</h2></div><span class="step-pill">2 av 3</span></div><div class="search-wrap"><span>⌕</span><input id="studentSearch" placeholder="Sök elev..." autocomplete="off"></div><div id="studentGrid" class="student-grid"></div></section>
+<section id="itemsView" class="view hidden"><button class="back-btn" data-back="students">← Till elever</button><div class="section-head"><div><p class="eyebrow">STEG 3</p><h2 id="studentTitle">Välj sak</h2><p id="studentSubtitle"></p></div><span class="step-pill">3 av 3</span></div><div id="studentLoans" class="mini-loans"></div><div class="category-row" id="categoryRow"></div><div id="itemGrid" class="item-grid"></div></section>
 <section id="activeView" class="view hidden"><button class="back-btn" id="activeBack">← Tillbaka</button><div class="section-head"><div><p class="eyebrow">ÖVERSIKT</p><h2>Aktiva lån</h2><p>Se och lämna tillbaka det som är ute.</p></div><span class="count-badge" id="activeTotal">0</span></div><div class="filter-row loan-filters"><input id="loanSearch" class="filter-input" placeholder="Sök elev eller sak..." autocomplete="off"><select id="loanClassFilter" class="filter-input" aria-label="Filtrera på klass"><option value="">Alla klasser</option></select></div><div id="loanList" class="loan-list"></div></section>
 <section id="teacherView" class="view hidden"><div class="section-head"><div><p class="eyebrow">ADMINISTRATION</p><h2>Lärarläge</h2><p>Full kontroll över boden.</p></div><button class="ghost-btn" id="teacherLogout">Logga ut</button></div><div id="statsGrid" class="stats-grid"></div><div class="admin-tabs"><button class="admin-tab active" data-tab="dashboard">Översikt</button><button class="admin-tab" data-tab="items">Saker</button><button class="admin-tab" data-tab="classes">Klasser</button><button class="admin-tab" data-tab="history">Historik</button></div><div id="adminPanel"></div></section>
 </main>
