@@ -73,7 +73,12 @@ body{font-family:"Trebuchet MS",Inter,ui-sans-serif,sans-serif;background:#fffaf
 .class-card:focus-visible,.student-card:focus-visible,.item-card:focus-visible,.back-btn:focus-visible,.primary-btn:focus-visible,.ghost-btn:focus-visible{outline:4px solid #ffbd3f;outline-offset:3px}
 .modal-card .modal-actions button{min-height:54px;font-size:17px;padding:14px 20px}
 @media(max-width:600px){.modal-card .modal-actions{flex-direction:column-reverse}.modal-card .modal-actions button{width:100%;min-height:56px;font-size:18px}}
-</style></head>
+</style>
+<style>/* Mer luft mellan välkomstytan och steg 1 */
+.hero + .quick-search + .search-results + .section-head{margin-top:30px}
+@media(max-width:600px){.hero + .quick-search + .search-results + .section-head{margin-top:24px}}
+</style>
+</head>
 <body><div class="app-shell">
 <header class="topbar"><button class="brand" id="homeBtn"><span class="brand-mark">B</span><span><strong>BODEN</strong><small>Lånesystem</small></span></button><nav><button class="nav-btn" id="activeBtn">📋 Aktiva <b id="loanCount">0</b></button><button class="nav-btn teacher-action" id="teacherBtn">⚙️ Lärare</button></nav></header>
 <main>
