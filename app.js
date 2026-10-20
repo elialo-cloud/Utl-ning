@@ -210,9 +210,9 @@ function renderItems() {
 
 function openLoan(item) {
   if (!item || !selectedStudent || !selectedClass || available(item) <= 0) return;
-  // Ett tryck lånar ut direkt; toasten erbjuder en kort ångra-funktion.
   selectedItem = item;
-  confirmLoan();
+  $("modalText").textContent = selectedStudent + " i klass " + selectedClass.name + " vill låna " + item.icon + " " + item.name + ". Stämmer det?";
+  $("confirmModal").classList.remove("hidden");
 }
 
 function closeModal() {
@@ -246,7 +246,7 @@ function confirmLoan() {
   renderStudentLoans();
   renderStudents();
   updateCount();
-  setTimeout(() => show("homeView"), 700);
+  setTimeout(() => show("homeView"), 1400);
 }
 
 function returnLoan(id) {
