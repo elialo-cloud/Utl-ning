@@ -140,6 +140,66 @@ body{font-family:"Trebuchet MS",Inter,ui-sans-serif,sans-serif;background:#fffaf
  #confirmModal .modal-card .modal-actions button{min-height:62px;font-size:21px}
 }
 </style>
+
+<style>
+/* XXL-text: läsbart direkt för yngre barn */
+#homeView .section-head .eyebrow,#studentsView .section-head .eyebrow,#itemsView .section-head .eyebrow{font-size:23px!important;font-weight:1000!important;letter-spacing:0!important;margin-bottom:14px!important}
+#homeView .section-head h2,#studentsView .section-head h2,#itemsView .section-head h2{font-size:48px!important;line-height:1.08!important;font-weight:1000!important;letter-spacing:-.02em!important}
+#homeView .section-head p:not(.eyebrow),#studentsView .section-head p:not(.eyebrow),#itemsView .section-head p:not(.eyebrow){font-size:29px!important;line-height:1.3!important;font-weight:800!important;margin-top:14px!important}
+#homeView .step-pill,#studentsView .step-pill,#itemsView .step-pill{font-size:23px!important;padding:15px 18px!important}
+#homeView .class-card{min-height:180px!important;padding:28px!important;gap:18px!important}
+#homeView .class-card strong{font-size:38px!important;font-weight:1000!important}
+#homeView .class-card small{font-size:23px!important;line-height:1.3!important}
+#homeView .class-icon{width:78px!important;height:78px!important;font-size:38px!important}
+#studentsView .student-card{min-height:116px!important;padding:22px!important;gap:18px!important}
+#studentsView .student-info strong{font-size:30px!important;line-height:1.2!important;font-weight:1000!important}
+#studentsView .student-info small{font-size:21px!important}
+#studentsView .avatar{width:70px!important;height:70px!important;font-size:25px!important}
+#studentsView .search-wrap{height:82px!important}
+#studentsView .search-wrap input{font-size:28px!important}
+#itemsView .item-card{min-height:132px!important;padding:24px!important;gap:20px!important}
+#itemsView .item-info strong{font-size:30px!important;line-height:1.2!important;font-weight:1000!important}
+#itemsView .item-info small{font-size:21px!important}
+#itemsView .item-icon{width:78px!important;height:78px!important;font-size:40px!important}
+#itemsView .category{font-size:24px!important;padding:16px 21px!important}
+#itemsView .current-student{font-size:27px!important}
+#studentsView .back-btn,#itemsView .back-btn{font-size:25px!important;padding:18px 22px!important}
+#confirmModal .modal-card h3{font-size:38px!important}
+#confirmModal .modal-card p:not(.eyebrow){font-size:27px!important;line-height:1.4!important}
+#confirmModal .modal-card .eyebrow{font-size:22px!important}
+#confirmModal .modal-card .modal-actions button{min-height:78px!important;font-size:27px!important}
+@media(max-width:600px){
+ #homeView .section-head,#studentsView .section-head,#itemsView .section-head{margin:28px 0 23px!important;gap:8px!important}
+ #homeView .section-head .eyebrow,#studentsView .section-head .eyebrow,#itemsView .section-head .eyebrow{font-size:19px!important;margin-bottom:12px!important}
+ #homeView .section-head h2,#studentsView .section-head h2,#itemsView .section-head h2{font-size:38px!important;line-height:1.1!important}
+ #homeView .section-head p:not(.eyebrow),#studentsView .section-head p:not(.eyebrow),#itemsView .section-head p:not(.eyebrow){font-size:24px!important;line-height:1.3!important;margin-top:11px!important}
+ #homeView .step-pill,#studentsView .step-pill,#itemsView .step-pill{font-size:17px!important;padding:11px 10px!important}
+ #homeView .class-card{min-height:150px!important;padding:15px 12px!important;gap:9px!important}
+ #homeView .class-card strong{font-size:29px!important;line-height:1.1!important}
+ #homeView .class-card small{font-size:18px!important;line-height:1.25!important}
+ #homeView .class-icon{width:49px!important;height:49px!important;font-size:25px!important}
+ #homeView .class-card>b{font-size:28px!important}
+ #studentsView .student-grid{grid-template-columns:1fr!important;gap:12px!important}
+ #studentsView .student-card{min-height:102px!important;padding:17px!important;gap:15px!important}
+ #studentsView .student-info strong{font-size:27px!important}
+ #studentsView .student-info small{font-size:19px!important}
+ #studentsView .avatar{width:62px!important;height:62px!important;font-size:22px!important}
+ #studentsView .search-wrap{height:75px!important;min-height:75px!important}
+ #studentsView .search-wrap input{font-size:24px!important}
+ #itemsView .item-grid{grid-template-columns:1fr!important;gap:13px!important}
+ #itemsView .item-card{min-height:112px!important;padding:17px!important;gap:15px!important}
+ #itemsView .item-info strong{font-size:27px!important;line-height:1.2!important}
+ #itemsView .item-info small{font-size:19px!important}
+ #itemsView .item-icon{width:62px!important;height:62px!important;font-size:32px!important}
+ #itemsView .category{font-size:20px!important;padding:13px 16px!important}
+ #itemsView .current-student{font-size:22px!important}
+ #studentsView .back-btn,#itemsView .back-btn{font-size:21px!important;padding:15px 18px!important}
+ #confirmModal .modal-card h3{font-size:32px!important}
+ #confirmModal .modal-card p:not(.eyebrow){font-size:23px!important}
+ #confirmModal .modal-card .eyebrow{font-size:19px!important}
+ #confirmModal .modal-card .modal-actions button{min-height:70px!important;font-size:24px!important}
+}
+</style>
 </head>
 <body><div class="app-shell">
 <header class="topbar"><button class="brand" id="homeBtn"><span class="brand-mark">B</span><span><strong>BODEN</strong><small>Lånesystem</small></span></button><nav><button class="nav-btn" id="activeBtn">📋 Aktiva <b id="loanCount">0</b></button><button class="nav-btn teacher-action" id="teacherBtn">⚙️ Lärare</button></nav></header>
