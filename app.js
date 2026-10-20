@@ -172,7 +172,7 @@ function renderStudentLoans() {
     : [];
 
   $("studentLoans").innerHTML = loans.length
-    ? `<div class="mini-title">${loans.length} aktivt lån</div>${loans.map(loan => `<button class="mini-loan" data-return="${attr(loan.id)}">${loan.icon}<span><strong>${escapeHtml(loan.itemName)}</strong><small>${date(loan.borrowedAt)}</small></span><b>↩</b></button>`).join("")}`
+    ? `<div class="mini-title">Du har lånat – tryck för att lämna tillbaka:</div>${loans.map(loan => `<button class="mini-loan" data-return="${attr(loan.id)}">${loan.icon}<span><strong>${escapeHtml(loan.itemName)}</strong><small>Lämna tillbaka</small></span><b>↩</b></button>`).join("")}`
     : "";
 
   document.querySelectorAll("#studentLoans [data-return]").forEach(button => {
